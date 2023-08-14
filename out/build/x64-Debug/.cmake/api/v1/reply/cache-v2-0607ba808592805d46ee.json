@@ -26,6 +26,30 @@
 			"value" : "C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject"
 		},
 		{
+			"name" : "Assignment_BINARY_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug"
+		},
+		{
+			"name" : "Assignment_SOURCE_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Value Computed by CMake"
+				}
+			],
+			"type" : "STATIC",
+			"value" : "C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject"
+		},
+		{
 			"name" : "CMAKE_AR",
 			"properties" : 
 			[
@@ -687,7 +711,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "1"
+			"value" : "2"
 		},
 		{
 			"name" : "CMAKE_PLATFORM_INFO_INITIALIZED",
@@ -735,7 +759,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "ASSIGNMENT"
+			"value" : "Assignment"
 		},
 		{
 			"name" : "CMAKE_RANLIB",

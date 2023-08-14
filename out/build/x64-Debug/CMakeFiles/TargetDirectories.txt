@@ -1,2 +1,5 @@
 C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug/CMakeFiles/edit_cache.dir
 C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug/src/CMakeFiles/edit_cache.dir
+C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug/src/CMakeFiles/Assignment.dir
+C:/Users/csakellaris/Documents/GitHub/KnowledgeTransferProject/out/build/x64-Debug/src/CMakeFiles/rebuild_cache.dir
