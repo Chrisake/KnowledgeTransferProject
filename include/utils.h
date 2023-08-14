@@ -16,6 +16,7 @@ namespace utils
    * @param    t [std::time_t] - The timer object representing time elapsed since epoch
    * @return   [std::tm] - The calendar time, expressed as local time
    */
+    /*
    std::tm localtime(std::time_t t) {
       {
 #ifdef _MSC_VER >= 1400 // MSVCRT (2005+): std::localtime is threadsafe
@@ -27,6 +28,7 @@ namespace utils
 #endif // _MSC_VER
       }
    }
+   */
 
    /**
    * @brief    Returns the current timestamp as a formatted string.         
