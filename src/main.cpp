@@ -3,7 +3,8 @@
 #include <iostream>
 
 int main() {
-	std::cout << utils::reverse(1234) << "\n";
+	uint32_t result = utils::reverse(1234);
+	std::cout << result << "\n";
 	
 	return 0;
 }
