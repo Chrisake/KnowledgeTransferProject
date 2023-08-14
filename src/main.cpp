@@ -3,5 +3,5 @@
 #include <iostream>
 
 void main() {
-	cout << utils::reverse(1234) << "\n";
+	std::cout << utils::reverse(1234) << "\n";
 }
