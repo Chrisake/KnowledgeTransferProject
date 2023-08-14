@@ -34,6 +34,7 @@ namespace utils
    * @brief    Returns the current timestamp as a formatted string.         
    * @return   [std::string] - The returned timestamp has the format: "dd-mm-yyyy HH:MM:SS.xxx"
    */
+    /*
    std::string timestamp() {
 
       using namespace std::literals;
@@ -54,7 +55,7 @@ namespace utils
 
       return sstream.str();
    }
-   
+   */
    /**
    * @brief    Reverses the input integer.
    *           Example: 
