@@ -4,7 +4,6 @@
 #include <string>
 #include <sstream>
 #include <iomanip>
-#include "utils.cpp"
 
 namespace utils
 {
@@ -17,42 +16,13 @@ namespace utils
    * @param    t [std::time_t] - The timer object representing time elapsed since epoch
    * @return   [std::tm] - The calendar time, expressed as local time
    */
-   std::tm localtime(std::time_t t) {
-      {
-#ifdef _MSC_VER >= 1400 // MSVCRT (2005+): std::localtime is threadsafe
-#pragma warning(suppress : 4996)
-         return *std::localtime(&t); 
-#else // POSIX
-         std::tm temp;
-         return *::localtime_r(&t, &temp);
-#endif // _MSC_VER
-      }
-   }
+    std::tm localtime(std::time_t t);
 
    /**
    * @brief    Returns the current timestamp as a formatted string.         
    * @return   [std::string] - The returned timestamp has the format: "dd-mm-yyyy HH:MM:SS.xxx"
    */
-   std::string timestamp() {
-
-      using namespace std::literals;
-      using system_clock = std::chrono::system_clock;
-      using milliseconds = std::chrono::microseconds;
-
-      const auto now = system_clock::now();
-      const auto timer = system_clock::to_time_t(now);
-      const auto local_time = localtime(timer);
-
-      auto sstream = std::stringstream{};
-      sstream << std::put_time(&local_time, "%d-%m-%Y %H:%M:%S");
-
-      //append milliseconds to the timestamp
-      auto duration = now.time_since_epoch();
-      const auto millisec = std::chrono::duration_cast<milliseconds>(duration) % 1000ms;
-      sstream << "." + std::to_string(millisec.count());
-
-      return sstream.str();
-   }
+   std::string timestamp();
    /**
    * @brief    Reverses the input integer.
    *           Example: 
