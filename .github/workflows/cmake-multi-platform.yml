@@ -32,7 +32,7 @@ jobs:
             c_compiler: cl
             cpp_compiler: cl
             artifact_name: Assignment.exe
-            path: src
+            path: x64-Debug/src
             asset_name: assignment-windows-amd64
           - os: ubuntu-latest
             c_compiler: gcc
