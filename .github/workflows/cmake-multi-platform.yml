@@ -86,7 +86,7 @@ jobs:
       if: matrix.os == 'ubuntu-latest'
       run: zip release.zip ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }} -r
 
-    - name: Zip Release Folder Linux
+    - name: Zip Release Folder Windows
       if: matrix.os == 'windows-latest'
       run: powershell Compress-Archive ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }} release.zip
 
