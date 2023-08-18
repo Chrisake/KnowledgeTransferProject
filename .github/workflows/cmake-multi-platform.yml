@@ -31,14 +31,12 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
-            artifact_name: Assignment.exe
-            path: src/Release
+            artifact_name: \src\Release\Assignment.exe
             asset_name: assignment-windows-amd64
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-            artifact_name: Assignment
-            path: src
+            artifact_name: src/Assignment
             asset_name: assignment-linux-amd64
           #- os: ubuntu-latest
           #  c_compiler: clang
@@ -88,4 +86,4 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.asset_name }}
-        path: ${{ steps.strings.outputs.build-output-dir }}/${{ matrix.path }}/${{ matrix.artifact_name }}
+        path: ${{ steps.strings.outputs.build-output-dir }}${{ matrix.artifact_name }}
