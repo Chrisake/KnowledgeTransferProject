@@ -24,17 +24,21 @@ jobs:
       #
       # To add more build types (Release, Debug, RelWithDebInfo, etc.) customize the build_type list.
       matrix:
-        os: [ubuntu-latest] #, windows-latest
+        os: [ubuntu-latest, windows-latest] #, 
         build_type: [Release]
-        c_compiler: [gcc] #, clang, cl
+        c_compiler: [gcc, cl] #, clang
         include:
-          #- os: windows-latest
-          #  c_compiler: cl
-          #  cpp_compiler: cl
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+            artifact_name: Assignment.exe
+            path: src
+            asset_name: assignment-windows-amd64
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
             artifact_name: Assignment
+            path: src
             asset_name: assignment-linux-amd64
           #- os: ubuntu-latest
           #  c_compiler: clang
@@ -80,5 +84,5 @@ jobs:
     - name: Binary Upload
       uses: actions/upload-artifact@v3
       with:
-        name: Application
-        path: ${{ steps.strings.outputs.build-output-dir }}/src/Assignment
+        name: ${{ matrix.asset_name }}
+        path: ${{ steps.strings.outputs.build-output-dir }}/${{ matrix.path }}/${{ matrix.artifact_name }}
