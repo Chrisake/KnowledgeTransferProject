@@ -36,7 +36,7 @@ jobs:
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-            release_path: src\*
+            release_path: /src/*
             asset_name: assignment-linux-amd64
           #- os: ubuntu-latest
           #  c_compiler: clang
@@ -83,7 +83,7 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
 
     - name: Zip Release Folder
-      run: zip release.zip ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }}
+      run: zip release.zip ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }} -r
 
     - name: Upload Archive
       uses: actions/upload-artifact@v3
