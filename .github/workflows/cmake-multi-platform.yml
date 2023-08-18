@@ -31,7 +31,7 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
-            release_path: \src\Release\*
+            release_path: \src\Release
             asset_name: assignment-windows-amd64
           - os: ubuntu-latest
             c_compiler: gcc
@@ -82,8 +82,13 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
-    - name: Zip Release Folder
+    - name: Zip Release Folder Linux
+      if: matrix.os == 'ubuntu-latest'
       run: zip release.zip ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }} -r
+
+    - name: Zip Release Folder Linux
+      if: matrix.os == 'windows-latest'
+      run: powershell Compress-Archive ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }} release.zip
 
     - name: Upload Archive
       uses: actions/upload-artifact@v3
