@@ -31,12 +31,12 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
-            artifact_name: \src\Release\Assignment.exe
+            release_path: \src\Release\*
             asset_name: assignment-windows-amd64
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
-            artifact_name: src/Assignment
+            release_path: src\*
             asset_name: assignment-linux-amd64
           #- os: ubuntu-latest
           #  c_compiler: clang
@@ -82,8 +82,11 @@ jobs:
       # See https://cmake.org/cmake/help/latest/manual/ctest.1.html for more detail
       run: ctest --build-config ${{ matrix.build_type }}
 
+    - name: Zip Release Folder
+      run: zip release.zip ${{ matrix.release_path }}
+
     - name: Binary Upload
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.asset_name }}
-        path: ${{ steps.strings.outputs.build-output-dir }}${{ matrix.artifact_name }}
+        path: release.zip
