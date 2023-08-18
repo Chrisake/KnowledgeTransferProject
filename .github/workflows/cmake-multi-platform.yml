@@ -83,9 +83,9 @@ jobs:
       run: ctest --build-config ${{ matrix.build_type }}
 
     - name: Zip Release Folder
-      run: zip release.zip ${{ matrix.release_path }}
+      run: zip release.zip ${{ steps.strings.outputs.build-output-dir }}${{ matrix.release_path }}
 
-    - name: Binary Upload
+    - name: Upload Archive
       uses: actions/upload-artifact@v3
       with:
         name: ${{ matrix.asset_name }}
