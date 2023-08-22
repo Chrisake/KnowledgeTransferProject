@@ -7,7 +7,20 @@ namespace utils {
 
 	TEST(ReverseFunction, HandlesUnsignedInts) {
 		EXPECT_EQ(reverse(1234), 4321);
-		EXPECT_EQ(reverse(12965927), 72956921);	
+		EXPECT_EQ(reverse(12965927), 72956921);
+	}
+
+	TEST(ReverseFunction, HandlesTooLargeUInts) {
+		try {
+			reverse(4294967295);
+			FAIL() << "Expected std::invalid_argument";
+		}
+		catch (std::invalid_argument const& err) {
+			EXPECT_EQ(err.what(), std::string("Argument val is not reversible"));
+		}
+		catch (...) {
+			FAIL() << "Expected std::invalid_argument";
+		}
 	}
 
 	TEST(ReverseFunction, HandlesStrings) {
@@ -84,7 +97,7 @@ namespace logging {
 		logger.warn("warn-None");
 		logger.info("info-None");
 		logger.debug("debug-None");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
+		EXPECT_EQ(handler->getTotalMessages(), 0);
 	}
 
 	TEST_F(LoggerTest, HandleDebugLevel) {
@@ -108,7 +121,7 @@ namespace logging {
 		logger.warn("warn-Info");
 		logger.info("info-Info");
 		logger.debug("debug-Info");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
+		EXPECT_EQ(handler->getTotalMessages(), 4);
 	}
 
 	TEST_F(LoggerTest, HandleWarnLevel) {
@@ -120,7 +133,7 @@ namespace logging {
 		logger.warn("warn-Warn");
 		logger.info("info-Warn");
 		logger.debug("debug-Warn");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
+		EXPECT_EQ(handler->getTotalMessages(), 3);
 	}
 
 	TEST_F(LoggerTest, HandleErrorLevel) {
@@ -132,7 +145,7 @@ namespace logging {
 		logger.warn("warn-Error");
 		logger.info("info-Error");
 		logger.debug("debug-Error");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
+		EXPECT_EQ(handler->getTotalMessages(), 2);
 	}
 
 	TEST_F(LoggerTest, HandleFatalLevel) {
@@ -144,7 +157,7 @@ namespace logging {
 		logger.warn("warn-Fatal");
 		logger.info("info-Fatal");
 		logger.debug("debug-Fatal");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
+		EXPECT_EQ(handler->getTotalMessages(), 1);
 	}
 
 	TEST_F(LoggerTest, HandleMultipleHandlers) {
@@ -158,8 +171,21 @@ namespace logging {
 		TestHandler* handler2 = (TestHandler*)logger.get_handler("Test2").value();
 		logger.info("info-Multi");
 		logger.debug("debug-Multi");
-		EXPECT_EQ(handler->getTotalMessages(), 5);
-		EXPECT_EQ(handler2->getTotalMessages(), 2);
+		EXPECT_EQ(handler->getTotalMessages(), 3);
+		EXPECT_EQ(handler2->getTotalMessages(), 1);
+	}
+
+	TEST_F(LoggerTest, HandleSetLevelHandlers) {
+		Logger& logger = Logger::instance();
+		handler->set_level(log_level::fatal);
+		handler->resetCounter();
+		logger.fatal("fatal-Multi");
+		logger.debug("debug-Multi");
+		handler->set_level(log_level::debug);
+		logger.error("error-Multi");
+		logger.warn("warn-Multi");
+		logger.info("info-Multi");
+		EXPECT_EQ(handler->getTotalMessages(), 4);
 	}
 }
 

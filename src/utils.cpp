@@ -44,8 +44,8 @@ namespace utils
 		while (input > 0) {
 			res = res * 10 + input % 10;
 			input /= 10;
-			if (old_res > res/10) {
-				throw std::invalid_argument(std::to_string(val) + " is not reversible");
+			if (input == 0 && old_res > res/10) {
+				throw std::invalid_argument("Argument val is not reversible");
 				return UINT32_MAX;
 			}
 			old_res = res;
@@ -54,11 +54,6 @@ namespace utils
 	}
 
 	std::string reverse(const std::string& src) {
-		std::string res = src;
-		size_t length = res.size();
-		for (size_t i = 0; i < length / 2; i++) {
-			std::swap(res[i], res[length - 0x1 - i]);
-		}
-		return res;
+		return std::string(src.rbegin(),src.rend());
 	}
 }

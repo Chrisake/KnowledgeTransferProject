@@ -23,10 +23,6 @@ namespace logging {
 #pragma region - ConsoleHandler implementation
    void ConsoleHandler::log(const std::string& message, const log_level severity) {
 
-      const auto verbosity = get_level();
-      if (!is_loggable(verbosity, severity))
-         return;
-
       //acquire the lock before writing to the file stream for thread safety
       const auto lock = std::lock_guard<std::mutex>{ m_mutex };
       std::cout << utils::timestamp() 
@@ -61,10 +57,6 @@ namespace logging {
    }
 
    void FileHandler::log(const std::string& message, const log_level severity) {
-
-      const auto verbosity = get_level();
-      if (!is_loggable(verbosity, severity))
-         return;
 
       //acquire the lock before writing to the file stream for thread safety
       const auto lock = std::lock_guard<std::mutex>{ m_mutex };
@@ -111,7 +103,9 @@ namespace logging {
                     const log_level severity) const
    {
       for (const auto& [name, handler] : m_handlers) {
-         handler->log(message, severity);
+          const auto verbosity = handler->get_level();
+          if (is_loggable(verbosity, severity))  
+            handler->log(message, severity);
       }
    }
 
